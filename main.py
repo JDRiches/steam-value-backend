@@ -10,4 +10,4 @@ api = SteamApiCaller(key=f.read())
 app = FastAPI()   
 @app.get("/") 
 async def main_route():    
-  return api.GetGamesFromID(id="76561198044048029")
+  return api.GetGamesFromUserID(id="76561198044048029")
