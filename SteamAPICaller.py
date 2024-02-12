@@ -24,7 +24,7 @@ class SteamApiCaller:
 
     def GetGamesFromUserID(self, id: str):
         
-        # Get Request on the Steam Web API for a players ownee games
+        # Get Request on the Steam Web API for a players owned games
         url = f" http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key={self.key}&steamid={id}&format=json"
         steam_response = requests.get(url)
         steam_json = steam_response.json()
@@ -38,6 +38,8 @@ class SteamApiCaller:
         
 
         # Build response
+        response['id'] = id
+        response['total'] = steam_json['response']['game_count']
         response['games'] = games
 
         return response
