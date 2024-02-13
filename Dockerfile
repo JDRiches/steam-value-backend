@@ -14,6 +14,8 @@ RUN poetry install
 
 COPY clean_app_list.json ./
 
+EXPOSE 8080
+
 CMD ["poetry", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 
  
