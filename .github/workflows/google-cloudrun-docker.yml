@@ -86,7 +86,7 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ env.GAR_LOCATION }}/${{ env.SERVICE }}:latest" ./
+          docker build  --platform=linux/amd64 -t "${{ env.GAR_LOCATION }}/${{ env.SERVICE }}:latest" ./
           docker push "${{ env.GAR_LOCATION }}/${{ env.SERVICE }}:latest"
 
       # END - Docker auth and build
