@@ -4,16 +4,20 @@ RUN pip install poetry==1.7.1
 
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock ./
-
 COPY main.py ./
 COPY SteamAPICaller.py ./
 
 
-RUN poetry install 
+
+RUN pip install --upgrade pip
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r  requirements.txt
+
 
 COPY clean_app_list.json ./
 
-CMD ["poetry", "run", "uvicorn", "main:app", "--host=0.0.0.0", "--port=8080"]
+EXPOSE 8080
+
+CMD ["uvicorn", "main:app", "--host=0.0.0.0", "--port=8080"]
 
  
