@@ -161,3 +161,4 @@ cython_debug/
 
 keys.txt
 app_list.json
+price_api_key.txt
