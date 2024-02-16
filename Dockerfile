@@ -6,6 +6,7 @@ WORKDIR /app
 
 COPY main.py ./
 COPY SteamAPICaller.py ./
+COPY PriceAPICaller.py ./
 
 
 

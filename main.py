@@ -1,5 +1,6 @@
 from fastapi import FastAPI  
 from SteamAPICaller import SteamApiCaller
+from PriceAPICaller import PriceAPICaller
 import os
 import uvicorn
 
@@ -7,17 +8,32 @@ import uvicorn
 if "STEAM_API_KEY" in os.environ:
     key = os.environ['STEAM_API_KEY']
 else:
-    f = open("keys.txt", "r")
-    key = f.read()
+    with open("keys.txt", "r") as f:
+        key = f.read()
 
-api = SteamApiCaller(key=key)
+
+if "PRICE_API_KEY" in os.environ:
+    price_key = os.environ['PRICE_API_KEY']
+else:
+    with open("price_api_key.txt") as f:
+        price_key = f.read()
+
+steam_api = SteamApiCaller(key=key)
+price_api = PriceAPICaller(key=price_key)
 
 app = FastAPI()
 
 # Path to get the games owend by user and time played
 @app.get("/games/{user_id}") 
-async def games_route(user_id):    
-  return api.GetGamesFromUserID(id=str(user_id))
+async def games_route(user_id):
+  
+  steam_response = steam_api.GetGamesFromUserID(id=str(user_id))
+
+  ids = price_api.AddCostToGames(steam_response['games'])
+
+  
+
+  return ids
 
 
 
