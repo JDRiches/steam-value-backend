@@ -4,10 +4,7 @@ RUN pip install poetry==1.7.1
 
 WORKDIR /app
 
-COPY main.py ./
-COPY SteamAPICaller.py ./
-COPY PriceAPICaller.py ./
-
+COPY src ./src
 
 
 RUN pip install --upgrade pip
@@ -19,6 +16,6 @@ COPY clean_app_list.json ./
 
 EXPOSE 8080
 
-CMD ["uvicorn", "main:app", "--host=0.0.0.0", "--port=8080"]
+CMD ["uvicorn", "src.main:app", "--host=0.0.0.0", "--port=8080"]
 
  
