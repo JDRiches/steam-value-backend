@@ -24,11 +24,10 @@ price_api = PriceAPICaller(key=price_key)
 app = FastAPI()
 
 # Path to get the games owend by user and time played
-@app.get("/games/{user_id}") 
-async def games_route(user_id):
+@app.get("/value/") 
+async def games_route(user_id: str = "None"):
   
   steam_response = steam_api.GetGamesFromUserID(id=str(user_id))
-
   ids = price_api.AddCostToGames(steam_response['games'])
 
   
