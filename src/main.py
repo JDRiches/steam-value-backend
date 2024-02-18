@@ -1,6 +1,6 @@
 from fastapi import FastAPI  
-from SteamAPICaller import SteamApiCaller
-from PriceAPICaller import PriceAPICaller
+from src.SteamAPICaller import SteamApiCaller
+from src.PriceAPICaller import PriceAPICaller
 import os
 import uvicorn
 
