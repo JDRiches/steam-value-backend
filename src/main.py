@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.SteamAPICaller import SteamApiCaller
 from src.PriceAPICaller import PriceAPICaller
 import os
+import time
 import uvicorn
 
 #Read in Secret Steam Key
@@ -36,7 +37,7 @@ app.add_middleware(
 # Path to get the games owend by user and time played
 @app.get("/value/") 
 async def games_route(user_id: str = "None"):
-  
+  print(time.time)
   steam_response = steam_api.GetGamesFromUserID(id=str(user_id))
   ids = price_api.AddCostToGames(steam_response['games'])
 

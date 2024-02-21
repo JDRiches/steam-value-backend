@@ -33,7 +33,6 @@ class PriceAPICaller:
         price_response = requests.post(url, data=json.dumps(payload))
         response = price_response.json()
 
-        print(response.keys())
         # Create price dict
         price_dict = {}
 
