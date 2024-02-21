@@ -1,4 +1,5 @@
-from fastapi import FastAPI  
+from fastapi import FastAPI 
+from fastapi.middleware.cors import CORSMiddleware
 from src.SteamAPICaller import SteamApiCaller
 from src.PriceAPICaller import PriceAPICaller
 import os
@@ -22,6 +23,15 @@ steam_api = SteamApiCaller(key=key)
 price_api = PriceAPICaller(key=price_key)
 
 app = FastAPI()
+
+origins = ['*']
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 
 # Path to get the games owend by user and time played
 @app.get("/value/") 
