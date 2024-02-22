@@ -27,7 +27,12 @@ class SteamApiCaller:
         # Get Request on the Steam Web API for a players owned games
         url = f" http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key={self.key}&steamid={id}&format=json"
         steam_response = requests.get(url)
+        
+        if steam_response.status_code != 200:
+            return "FAIL"
         steam_json = steam_response.json()
+
+   
 
         # Add Title to the entries
         response = {}

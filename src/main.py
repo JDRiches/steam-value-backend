@@ -39,11 +39,14 @@ app.add_middleware(
 async def games_route(user_id: str = "None"):
   print(time.time)
   steam_response = steam_api.GetGamesFromUserID(id=str(user_id))
-  ids = price_api.AddCostToGames(steam_response['games'])
+
+  if steam_response != "FAIL":
+    ids = price_api.AddCostToGames(steam_response['games'])
+    return ids
 
   
 
-  return ids
+  return {"response": "Error"}
 
 
 
